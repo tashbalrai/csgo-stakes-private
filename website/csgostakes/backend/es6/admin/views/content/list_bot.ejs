@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <% if (typeof success != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success">
+                        <span><%= success %></span>
+                    </div>
+                    <% } %>
+                    <h4 class="card-title">Bot Accounts</h4>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th class="text-center">ID#</th>
+                                    <th>Account Name</th>
+                                    <th>SteamID</th>
+                                    <th>Host</th>
+                                    <th>State</th>
+                                    <th>Inventory count</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                if (typeof record != 'undefined' && record.length > 0) {
+                                    for(let i=0; i < record.length; i++) {
+                                        var bot = record[i];
+                                        var stats = bot.stats || {};
+                                %>
+
+                                <tr>
+                                    <td class="text-center"><%= record[i].id %></td>
+                                    <td><%= record[i].account_name %></td>
+                                    <td><%= record[i].steam_id %></td>
+                                    <td><%= record[i].host %></td>
+                                    <td><%= (record[i].state == 1) ? "On" : "Off" %></td>
+                                    <th><%= stats.inventory%></th>
+                                    <td class="td-actions text-right" style="display: flex">
+                                        <% if(stats.state == 1) {%>
+                                            <form method="post" action="<%=baseUrl%>/bots/<%=bot.id%>/pause">
+                                                <button class="btn btn-danger" title="Pause">
+                                                    <i class="material-icons">pause</i>
+                                                </button>
+                                            </form>
+                                        <%} else if(stats.state == 0) {%>
+                                            <form method="post" action="<%=baseUrl%>/bots/<%= bot.id%>/resume">
+                                                <button class="btn btn-primary" title="Resume">
+                                                    <i class="material-icons">play_arrow</i>
+                                                </button>
+                                            </form>
+                                        <%} else {%>
+                                            <button class="btn btn-black" title="Resume">
+                                                <i class="material-icons">play_arrow</i>
+                                            </button>
+                                        <%}%>
+                                        &nbsp;
+                                        <% if(typeof stats.state != 'undefined') {%>
+                                            <form method="post" action="<%=baseUrl%>/bots/<%= bot.id%>/deactivate">
+                                                <button class="btn btn-danger" title="Deactivate">
+                                                    <i class="material-icons">eject</i>
+                                                </button>
+                                            </form>
+                                        <%} else {%>
+                                            <form method="post" action="<%=baseUrl%>/bots/<%= bot.id%>/activate">
+                                                <button class="btn btn-primary" title="Activate">
+                                                    <i class="material-icons">settings_power</i>
+                                                </button>
+                                            </form>
+                                        <%}%>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-simple" 
+                                        onclick="window.location='<%=baseUrl%>/bots/edit/<%= record[i].id %>'">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <%
+                                    } 
+                                } else { 
+                                %>
+                                <tr>
+                                    <td colspan="7">No records found.</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <form id="removeFrom" method="post" action="<%=baseUrl%>/bots/remove">
+                            <input id="botId" type="hidden" name="botId" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function handleRemove(id) {
+        if (isFinite(id)) {
+            jQuery('#botId').val(id);
+            
+        }
+        
+    }
+</script>

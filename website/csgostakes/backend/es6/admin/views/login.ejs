@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <% include includes/head_login %>
+</head>
+
+<body>
+    <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+      <div class="navbar-header d-flex">
+          <a class="navbar-brand" href="/ctrldv"> CSGO Stakes Admin </a>
+      </div>
+    </nav>
+    <div class="wrapper wrapper-full-page">
+        <div class="full-page login-page"  data-color="blue">
+            <!--  you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose" -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7 mx-auto">
+                            <% if(error && error.message) { %>
+                            <div class="alert alert-danger">
+                                <span><%= error.message %></span>
+                            </div> 
+                            <% } %> 
+                            <form method="post" action="process/login">
+                                <div class="card card-login">
+                                    <div class="card-header text-center">
+                                        <h4 class="card-title">Login</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="form-group">
+                                          <div class="input-group">
+                                              <div class="input-group-addon">
+                                                  <i class="material-icons">face</i>
+                                              </div>
+                                              <input type="text" name="uname" class="form-control" placeholder="Username">
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <div class="input-group">
+                                              <div class="input-group-addon">
+                                                  <i class="material-icons">lock_outline</i>
+                                              </div>
+                                              <input type="password" name="pword" class="form-control" placeholder="Password">
+                                          </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" name="submit" class="btn btn-wd btn-lg">Sign In</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include includes/footer_login_scripts %>
+</body>
+</html>

@@ -1,0 +1,122 @@
+ <div class="container-fluid">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <form method="post" action="<%=baseUrl%>/bots/save" class="form-horizontal">
+                <div class="card-header card-header-text">
+                    <h4 class="card-title">Bot Details</h4>
+                </div>
+                <div class="card-content">
+                    <% if (typeof error != 'undefined' && error.length > 0) { %>
+                    <div class="alert alert-danger">
+                        <span></b>Please correct the below errors:</b></br>
+                            <% for (let i=0; i < error.length; i++) { %>
+                            <%= error[i] %>
+                            <% } %>
+                        </span>
+                    </div>
+                    <% } %>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Account Name</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="account_name" placeholder="Steam Account Name" required="true"
+                            <% if (typeof record!='undefined' && record.account_name) {%>
+                            value="<%= record.account_name%>"
+                            <% } %>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Account Password</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="account_password" placeholder="Steam Account Password" required="true"
+                            <% if (typeof record!='undefined' && record.password) {%>
+                            value="<%= record.password%>"
+                            <% } %>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Steam ID</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="steam_id" placeholder="64bit Steam ID" required="true"
+                            <% if (typeof record!='undefined' && record.steam_id) {%>
+                            value="<%= record.steam_id %>"
+                            <% } %>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Shared Secret</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="shared_secret" placeholder="Shared Secret" required="true"
+                            <% if (typeof record!='undefined' && record.shared_secret) {%>
+                            value="<%= record.shared_secret%>"
+                            <% } %>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Identity Secret</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="identity_secret" placeholder="Identity Secret" required="true"
+                            <% if (typeof record!='undefined' && record.identity_secret) {%>
+                            value="<%= record.identity_secret %>"
+                            <% } %>>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Host</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="host" placeholder="Host IP Address" required="true"
+                            <% if (typeof record!='undefined' && record.host) {%>
+                            value="<%= record.host %>"
+                            <% } %>>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Is Giveaway Bot?</label>
+                        <div class="col-md-10 checkbox-radios">
+                            <div class="togglebutton">
+                                <label>
+                                    <input name="bot_type" type="checkbox" 
+                                    <% if (typeof record!='undefined' && record.bot_type == 2) {%>
+                                    checked
+                                    <% } %>>
+                                    <span class="toggle"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right">Enable Bot</label>
+                        <div class="col-md-10 checkbox-radios">
+                            <div class="togglebutton">
+                                <label>
+                                    <input name="state" type="checkbox" 
+                                    <% if (typeof record!='undefined' && record.state) {%>
+                                    checked
+                                    <% } %>>
+                                    <span class="toggle"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label text-right"></label>
+                        <div class="col-md-10">
+                            <% if (typeof record != 'undefined' && record.id) { %>
+                            <input type="hidden" name="id" value="<%= record.id %>"/>
+                            <% } %>
+                                <a href="<%=baseUrl%>/bots">
+                                    <button type="button" class="btn btn-default">
+                                        Cancel
+                                    </button>
+                                </a>
+                            <button name="save" value="1" type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div> 

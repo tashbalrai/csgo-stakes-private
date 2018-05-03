@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <% if (typeof success != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success">
+                        <span><%= success %></span>
+                    </div>
+                    <% } %>
+                    <h4 class="card-title">Tickets <a href="<%= baseUrl %>/tickets/new"><i class="material-icons">refresh</i></a></h4>
+                    
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th class="text-center">ID#</th>
+                                    <th>From</th>
+                                    <th>Subject</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>created At</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                var STATUS = {
+                                    '1': 'OPEN',
+                                    '0': 'CLOSED',
+                                    '2': 'AWAITING USER REPLY',
+                                    '3': 'AWAITING ADMIN REPLY'
+                                };
+                                if (typeof record != 'undefined' && record.length > 0) {
+                                    for(let i=0; i < record.length; i++) {
+                                
+                                %>
+
+                                <tr>
+                                    <td class="text-center"><%= record[i].id %></td>
+                                    <td><%= record[i].profile_name %></td>
+                                    <td><%= record[i].subject %></td>
+                                    <td><%= record[i].department %></td>
+                                    <td><%= STATUS[record[i].status] %></td>
+                                    <td><%= new Date(record[i].created_at).toLocaleDateString() %></td>
+                                    <td class="td-actions text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-simple" 
+                                        onclick="window.location='<%= baseUrl %>/tickets/view/<%= record[i].id %>'">
+                                            <i class="material-icons">pageview</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <%
+                                    } 
+                                } else { 
+                                %>
+                                <tr>
+                                    <td colspan="7">No records found.</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <form id="removeFrom" method="post" action="<%= baseUrl %>/bots/remove">
+                            <input id="botId" type="hidden" name="botId" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

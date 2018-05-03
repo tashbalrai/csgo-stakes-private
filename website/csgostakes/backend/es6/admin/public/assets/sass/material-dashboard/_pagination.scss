@@ -1,0 +1,123 @@
+/*
+ *----------------------------------------------------------
+ * Pagination Styles
+ * ---------------------------------------------------------
+ */
+
+ .pagination{
+    background: none;
+    > li > a,
+    > li > span{
+        border: 0;
+        border-radius: 30px;
+        transition: all .3s;
+        padding: 0px 11px;
+        margin: 0 3px;
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px;
+        color: $gray-color;
+        font-weight: $font-weight-default;
+        font-size: $mdb-btn-font-size-base;
+        text-transform: uppercase;
+        background: transparent;
+
+        &:hover,
+        &:focus{
+            color: $gray-color;
+        }
+    }
+
+    > .active > a.page-link,
+    > .active > span{
+        color: $gray-color;
+        text-align: center;
+
+        &,
+        &:focus,
+        &:hover{
+            background-color: $brand-primary;
+            border-color: $brand-primary;
+            color: $white-color;
+            @include shadow-4dp-color($brand-primary);
+        }
+
+    }
+
+    // Colors
+    &.pagination-info{
+        > .active > a,
+        > .active > span{
+            &,
+            &:focus,
+            &:hover{
+                background-color: $brand-info;
+                border-color: $brand-info;
+                @include shadow-4dp-color($brand-info);
+            }
+        }
+    }
+
+    &.pagination-success{
+        > .active > a,
+        > .active > span{
+            &,
+            &:focus,
+            &:hover{
+                background-color: $brand-success;
+                border-color: $brand-success;
+                @include shadow-4dp-color($brand-success);
+            }
+        }
+    }
+
+    &.pagination-warning{
+        > .active > a,
+        > .active > span{
+            &,
+            &:focus,
+            &:hover{
+                background-color: $brand-warning;
+                border-color: $brand-warning;
+                @include shadow-4dp-color($brand-warning);
+            }
+        }
+    }
+
+    &.pagination-danger{
+        > .active > a,
+        > .active > span{
+            &,
+            &:focus,
+            &:hover{
+                background-color: $brand-danger;
+                border-color: $brand-danger;
+                @include shadow-4dp-color($brand-danger);
+            }
+        }
+    }
+    &.pagination-pager {
+      display: block;
+      li.page-item {
+        a.page-link {
+          padding: 5px 14px;
+          border: 1px solid #ddd;
+          border-radius: 15px;
+          height: auto;
+          line-height: 1.5;
+        }
+        &:not(.disabled) {
+          a.page-link {
+            color: $brand-primary;
+          }
+        }
+      }
+      .previous {
+        float: left;
+      }
+      .next {
+        float: right;
+      }
+    }
+
+}

@@ -1,0 +1,112 @@
+/*
+ *----------------------------------------------------------
+ * Modal Styles  
+ * ---------------------------------------------------------
+ */ 
+ 
+ .modal {
+	.modal-content {
+		box-shadow: 0 5px 20px rgba(0, 0, 0, 0.31);
+		border-radius: 3px;
+		border: 0;
+	}
+
+	.modal-header {
+		padding: 23px 26px;
+	}
+
+	.modal-body {
+		padding: 0 26px 10px;
+	}
+
+	.modal-footer {
+		.btn-link {
+			font-size: 14px;
+			color: #000;
+			font-weight: 500;
+
+			&:hover {
+				background-color: #eee;
+			}
+		}
+	}
+
+	&:not([data-modal-color]) {
+		.modal-footer {
+			.btn-link {
+				font-weight: 500;
+
+				&:hover {
+					background-color: #eee;
+				}
+			}
+		}
+	}
+
+	&[data-modal-color] {
+		color: #fff;
+
+		.modal-title,
+		.modal-footer .btn-link {
+			color: #fff;
+		}
+
+		.modal-footer {
+			background: rgba(0,0,0,0.1);
+		}
+
+		.modal-backdrop {
+			background: #fff;
+		}
+
+		.modal-footer {
+			.btn-link {
+				font-weight: 400;
+
+				&:hover {
+					background-color: rgba(0,0,0,0.1);
+				}
+			}
+		}
+	}
+
+	&[data-modal-color="blue"] .modal-content {
+		background: $blue;
+	}
+
+	&[data-modal-color="cyan"] .modal-content {
+		background: $cyan;
+	}
+
+	&[data-modal-color="green"] .modal-content {
+		background: $green;
+	}
+
+	&[data-modal-color="lightgreen"] .modal-content {
+		background: $green-50;
+	}
+
+	&[data-modal-color="lightblue"] .modal-content {
+		background: $blue-50;
+	}
+
+	&[data-modal-color="amber"] .modal-content {
+		background: $amber;
+	}
+
+	&[data-modal-color="teal"] .modal-content {
+		background: $teal;
+	}
+
+	&[data-modal-color="orange"] .modal-content {
+		background: $orange;
+	}
+
+	&[data-modal-color="bluegray"] .modal-content {
+		background: $blue-grey;
+	}
+
+	&[data-modal-color="red"] .modal-content {
+		background: $red;
+	}
+}

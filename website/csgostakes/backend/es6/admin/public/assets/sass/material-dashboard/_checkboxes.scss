@@ -1,0 +1,92 @@
+/*
+ *----------------------------------------------------------
+ * Checkbox Styles
+ * ---------------------------------------------------------
+ */
+.checkbox {
+    label {
+        position: relative;
+        font-family: Arial, sans-serif;
+        line-height: 135%;
+        cursor: pointer;
+    }
+    // Hide native checkbox
+    input[type=checkbox] {
+        position: relative;
+        top: rem(-6);
+        cursor: pointer;
+        margin-right: 1rem;
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 1px solid $black;
+        }
+
+        &:checked {
+          animation: checkbox-ripple-on 0.2s linear forwards;
+
+            &:before {
+                -webkit-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg); // IE9 only
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                -webkit-transition: all 0.3s ease-in-out;
+                -o-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                height: 0.45rem;
+                border-color: $mdb-checkbox-checked-color;
+                border-top-style: none;
+                border-right-style: none;
+                top: 4px;
+                width: 0.8rem;
+                left: 4px;
+            }
+            &:after {
+              border: 1px solid $black;
+            }
+
+        }
+        &:not(:checked) {
+            animation: checkbox-ripple-off 0.2s linear forwards;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            top: rem(-2);
+            left: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            background: #fff;
+            cursor: pointer;
+        }
+    }
+}
+
+@keyframes checkbox-ripple-off {
+  0% {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0);
+  }
+  50% {
+    box-shadow: 3px 3px 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes checkbox-ripple-on {
+  0% {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0);
+  }
+  50% {
+    box-shadow: 3px 3px 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0);
+  }
+}

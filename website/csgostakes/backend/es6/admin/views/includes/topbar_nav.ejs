@@ -1,0 +1,27 @@
+<nav class="navbar navbar-toggleable-md navbar-default navbar-absolute navbar-inverse" data-topbar-color="blue">
+    <div class="navbar-minimize">
+        <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+            <i class="material-icons visible-on-sidebar-regular f-26">keyboard_arrow_left</i>
+            <i class="material-icons visible-on-sidebar-mini f-26">keyboard_arrow_right</i>
+        </button>
+    </div>
+    <div class="navbar-header d-flex">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <% if (data && data.title) { %>
+        <a class="navbar-brand" href="#"> <%= data.title %> </a>
+        <% } %>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="<%=baseUrl%>/logout" class="nav-link">
+                    <i class="material-icons">all_out</i>
+                    <p class="hidden-lg-up">Settings</p>
+                </a>
+            </li>
+            <li class="separator hidden-lg-up"></li>
+        </ul>
+    </div>
+</nav>

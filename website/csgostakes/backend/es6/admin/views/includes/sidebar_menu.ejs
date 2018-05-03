@@ -1,0 +1,59 @@
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link" href="<%= baseUrl %>/">
+            <i class="material-icons">dashboard</i>
+            <p>
+                Dashboard
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#charts" class="collapsed" aria-expanded="false">
+            <i class="material-icons">build</i>
+            <p>
+                Manage Bots
+                <i class="material-icons">arrow_drop_down</i>
+            </p>
+        </a>
+        <div class="collapse" id="charts" aria-expanded="false" style="height: 0px;">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= baseUrl %>/bots/new">Add New</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= baseUrl %>/bots">List</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<%= baseUrl %>/users">
+            <i class="material-icons">people</i>
+            <p>
+                Users
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#tickets" data-toggle="collapse" class="collapsed">
+            <i class="material-icons">feedback</i>
+            <p>
+                Tickets
+                <i class="material-icons">arrow_drop_down</i>
+            </p>
+        </a>
+        <div class="collapse" id="tickets">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= baseUrl %>/tickets/new">New</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= baseUrl %>/tickets/replied">Replied</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= baseUrl %>/tickets/closed">Closed</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

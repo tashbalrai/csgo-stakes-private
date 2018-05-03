@@ -1,0 +1,18 @@
+Add IP based bot
+
+Deposit process:
+Phase 1:
+1. User deposit and queued
+2. Bot assigned by master process
+3. Fetch set of 10 deposit queued records
+4. Create offer and set the required parameters
+5. Send the offer and set the status of the deposit to offer sent.
+
+Phase 2:
+1. Check if offer status changed.
+2. Ignore if status is not accepted.
+3. Update the deposit status of offer accepted and try to fetch the new items and update deposit to items received.
+4. if not received new items; mark the offer null; assign it to RESOLVER
+
+Phase 3:
+1. Assign items to the owners.

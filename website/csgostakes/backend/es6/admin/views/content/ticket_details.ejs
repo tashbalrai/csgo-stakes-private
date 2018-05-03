@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <%
+                    var STATUS = {
+                        '1': 'OPEN',
+                        '0': 'CLOSED',
+                        '2': 'AWAITING REPLY',
+                        '3': 'IN PROCESS'
+                    };
+                    %>
+                    <% if (typeof success != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success">
+                        <span><%= success %></span>
+                    </div>
+                    <% } %>
+                    <h3 class="card-title"> Ticket #<%= record.id %> / <%= record.profile_name %> / <%= new Date(record.created_at).toLocaleDateString() %> / <%= STATUS[record.status] %> / <%= record.user_id %></h3>
+                    <div>
+                        <button
+                                data-toggle="modal"
+                                data-target="#user-details-modal"
+                                data-id="<%= record.user_id %>"
+                                type="button" rel="tooltip"
+                                class="btn btn-primary action-details">
+                            Show history
+                        </button>
+                    </div>
+                    <div>
+                        <h3><%= record.subject %></h3>
+                        <p class="lead">
+                            <%= record.message %>
+                        </p>
+                        <% if(record.attachment){%>
+                        <div>
+                            <a href="/tickets/files/<%=record.attachment%>" target="_blank">
+                                <img style="width: 100px" class="img-fluid" src="/tickets/files/<%=record.attachment%>" />
+                            </a>
+                        </div>
+                        <%}%>
+                    </div>
+                    <div>
+                        <%for(let i=0; i < record.replies.length; i++) {%>
+                            <div style="background: <%= record.replies[i].user_id != record.user_id ? '#fff' : '#f8f8f8' %>; padding: 10px;margin-bottom: 10px">
+                                <div>
+                                    <p><%= record.replies[i].message %></p>
+                                    <strong><%= record.replies[i].user_name %></strong> <small><%= new Date(record.replies[i].created_at).toLocaleDateString()%></small>
+                                </div>
+                                <% if(record.replies[i].attachment){%>
+                                    <div>
+                                        <a target="_blank" href="/tickets/files/<%=record.replies[i].attachment%>">
+                                            <img style="width: 100px" class="img-fluid" src="/tickets/files/<%=record.replies[i].attachment%>" />
+                                        </a>
+                                    </div>
+                                <%}%>
+                            </div>
+                        <% } %>
+                    </div>
+                    <hr />
+                    <% if(record.status !=0) {%>
+                        <h5>Reply to ticket</h5>
+                        <form action="<%= baseUrl%>/tickets/<%=record.id%>" method="post">
+                            <textarea style="height: 100px" class="form-control" name="message" placeholder="Reply" rows="5"></textarea>
+                            <div>
+                                <button class="btn btn-primary" type="submit">Submit</button>
+
+                                <button type="button" class="btn btn-secondary delete-ticket" data-id="<%=record.id%>" type="submit">Close ticket</button>
+                            </div>
+                        </form>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="user-details-modal" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 90%">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% if (process.env.NODE_ENV != 'production') {%>
+    <script>
+    //   window.location = 'http://localhost:4000/?token=<%=token%>&sid=<%=uid%>'
+    </script>
+    <%}%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>hello</h1>
+        <h4>TOKEN=<%=token%></h4>
+        <h4>SID=<%=uid%></h4>
+        <h4>PID=<%=pid%></h4>
+    </div>
+    <script type="text/javascript">
+        var sock = io('/bn', {
+			transportOptions: {
+				polling: {
+					extraHeaders: {
+						'x-access-token': 'e0b1c3b63b4f1b48f1de633b6d16b986c58a6fe0366001e51210cbbc00f8b27d',
+						'x-user-sid': 5
+					}
+				}
+			}
+        });
+        
+        sock.on('connect', () => {
+            console.log('Connected...');
+        });
+
+        sock.on('message', (data) => {
+            console.log('Message> ', data);
+        });
+
+        sock.on('broadcast', (data) => {
+            console.log('BM > ', data);
+        });
+
+        sock.on('game_created', (data) => {
+            console.log('GC > ', data);
+        });
+
+        sock.on('game_joined', (data) => {
+            console.log('GJ > ', data);
+        });
+
+        sock.on('game_winner', (data) => {
+            console.log('GW > ', data);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+/*
+ *----------------------------------------------------------
+ * Radio Styles
+ * ---------------------------------------------------------
+ */
+
+.radio {
+    &.md-radio-inline {
+        display: inline-block;
+    }
+
+    input[type="radio"] {
+        display: none;
+        &:checked + label:before {
+            border-color: $mdb-radio-color-on;
+            animation: ripple 0.2s linear forwards;
+        }
+        &:disabled {
+          + label:before {
+            border-color: lighten($black,25%);
+          }
+          &:checked + label:after {
+            background-color: lighten($black,25%);
+          }
+        }
+        &:checked + label:after {
+            transform: scale(1);
+        }
+    }
+    label {
+        display: inline-block;
+        height: 20px;
+        position: relative;
+        padding: 0 2rem;
+        cursor: pointer;
+        vertical-align: bottom;
+        &:before, &:after {
+            position: absolute;
+            content: '';
+            border-radius: 50%;
+            transition: all .3s ease;
+            transition-property: transform, border-color;
+        }
+        &:before {
+            left: 0;
+            top: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid $mdb-radio-color-off;
+        }
+        &:after {
+            top: 5px;
+            left: 5px;
+            width: 10px;
+            height: 10px;
+            transform: scale(0);
+            background: $mdb-radio-color-on;
+        }
+    }
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0);
+  }
+  50% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0);
+  }
+}

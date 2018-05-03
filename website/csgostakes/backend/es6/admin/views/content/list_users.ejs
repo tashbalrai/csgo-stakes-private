@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    <% if (typeof success != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success">
+                        <span><%= success %></span>
+                    </div>
+                    <% } %>
+                    <h4 class="card-title">Users</h4>
+                    <form action="<%= baseUrl%>/users" method="get">
+                        <input value="<%=data.query%>" class="form-control" type="text" name="q" placeholder="Search by profile name">
+                    </form>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th class="text-center">ID#</th>
+                                    <th>Avatar</th>
+                                    <th>Profile Name</th>
+                                    <th>SteamID</th>
+                                    <th>Trade URL</th>
+                                    <th>Banned</th>
+                                    <th>Chat banned</th>
+                                    <th>Created at</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                if (typeof record != 'undefined' && record.length > 0) {
+                                    for(let i=0; i < record.length; i++) {
+                                
+                                %>
+
+                                <tr>
+                                    <td class="text-center"><%= record[i].id %></td>
+                                    <td>
+                                        <a href="<%= record[i].profile_url %>">
+                                            <img style="width: 64px" class="img-rounded img-fluid" src="<%= record[i].avatar %>" />
+                                        </a>
+                                    </td>
+                                    <td><%= record[i].profile_name %></td>
+                                    <td><%= record[i].steam_id %></td>
+                                    <td>
+                                        <a target="_blank" href="<%= record[i].trade_url %>">Trade</a>
+                                    </td>
+                                    <td><%= record[i].is_banned ? 'Yes' : 'No' %></td>
+                                    <td><%= record[i].is_chat_banned ? 'Yes' : 'No' %></td>
+                                    <td><%= new Date(record[i].created_at).toDateString() %></td>
+                                    <td class="td-actions text-right">
+                                        <button
+                                                data-toggle="modal"
+                                                data-target="#user-details-modal"
+                                                data-id="<%= record[i].id %>"
+                                                type="button" rel="tooltip"
+                                                class="btn btn-success btn-simple action-details">
+                                            <i class="material-icons">pageview</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <%
+                                    } 
+                                } else { 
+                                %>
+                                <tr>
+                                    <td colspan="7">No records found.</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <% for(let p = 1; p < data.pages+1; p++) {%>
+                                <li class="page-item <%= p === data.page ? 'active' : '' %>"><a class="page-link" href="<%= baseUrl%>/users?q=<%=data.query%>&page=<%=p%>"><%=p%></a></li>
+                                <%}%>
+
+                            </ul>
+                        </nav>
+                        <form id="removeFrom" method="post" action="<%=baseUrl%>/bots/remove">
+                            <input id="botId" type="hidden" name="botId" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="user-details-modal" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 90%">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+</div>

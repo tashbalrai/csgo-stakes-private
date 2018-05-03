@@ -1,0 +1,10 @@
+{
+  "apps": [{
+    "name": "web",
+    "script": "./sticky.js",
+    "watch": true,
+    "env": {
+      "NODE_DEV_MODE": "local"
+    }
+  }]
+}

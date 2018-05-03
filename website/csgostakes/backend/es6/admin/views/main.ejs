@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include includes/head %>
+</head>
+<body>
+    <div class="wrapper">
+        <% include includes/sidebar_nav %>
+        <div class="main-panel">
+           <% include includes/topbar_nav %> 
+        <div class="content">
+            <% if (data && data.content) { %>
+            <%- include(data.content) %>
+            <% } %>            
+        </div>
+        <% include includes/footer %>
+    </div>
+    </div>
+</body>
+<% include includes/footer_scripts %>
+</html>

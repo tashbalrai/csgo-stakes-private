@@ -1,0 +1,113 @@
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#deposits" role="tab">Deposits</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#withdrawals" role="tab">Withdrawals</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#inventory" role="tab">Inventory</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="deposits" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-primary">
+                    <tr>
+                        <th class="text-center">ID#</th>
+                        <th>Offer ID</th>
+                        <th>Items</th>
+                        <th>Offer response</th>
+                        <th>Created at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                    if (typeof record != 'undefined' && record.deposits.length > 0) {
+                        var deposits = record.deposits;
+                        for(let i=0; i < deposits.length; i++) {
+                            var items = deposits[i].items
+                            items = items.replace(/\\/g, "");
+                            items = JSON.parse(items);
+                            %>
+
+                            <tr>
+                                <td class="text-center"><%= deposits[i].id %></td>
+                                <td><%= deposits[i].offer_id %></td>
+                                <td><%= items.map(i => i.market_hash_name).join(', ') %></td>
+                                <td><%= deposits[i].offer_response %></td>
+                                <td><%= new Date(deposits[i].created_at).toLocaleDateString() %></td>
+                            </tr>
+                            <%
+                        }
+                    } else {
+                    %>
+                    <tr>
+                        <td colspan="7">No records found.</td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane" id="withdrawals" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-primary">
+                    <tr>
+                        <th class="text-center">ID#</th>
+                        <th>Offer ID</th>
+                        <th>Items</th>
+                        <th>Offer response</th>
+                        <th>Created at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                    if (typeof record != 'undefined' && record.withdraws.length > 0) {
+                        var withdraws = record.withdraws;
+                    for(let i=0; i < withdraws.length; i++) {
+                        var items = withdraws[i].items
+                        items = '[' + items.replace(/\\/g, "") + ']';
+                        items = JSON.parse(items);
+                    %>
+
+                    <tr>
+                        <td class="text-center"><%= withdraws[i].id %></td>
+                        <td><%= withdraws[i].offer_id %></td>
+                        <td><%= JSON.stringify(items)%></td>
+                        <td><%= withdraws[i].offer_response %></td>
+                        <td><%= new Date(withdraws[i].created_at).toLocaleDateString() %></td>
+                    </tr>
+                    <%
+                    }
+                    } else {
+                    %>
+                    <tr>
+                        <td colspan="7">No records found.</td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane" id="inventory" role="tabpanel">
+            <% if (typeof record != 'undefined' && record.inventory.length > 0) {
+                var inventory = record.inventory;
+            for(let i=0; i < inventory.length; i++) {
+                var item = inventory[i];
+                var img = item.image.startsWith('http') ? item.image : "http://steamcommunity-a.akamaihd.net/economy/image/"+item.image;
+            %>
+            <div style="width: 120px; margin: 10px; display: inline-block;">
+                <img class="img-fluid" src="<%=img%>" />
+                <small class="text-center"><%= item.mhash%></small>
+            </div>
+            <%}%>
+            <%} else {%>
+            <div>No records found.</div>
+            <% } %>
+        </div>
+    </div>
+</div>
