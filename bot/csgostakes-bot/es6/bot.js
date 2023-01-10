@@ -1,7 +1,7 @@
 'use strict';
 
 /*
-Auther: Vince
+Auther: Vipan Balrai
 Description: A steam bot worker.
 
 Notification message events:
